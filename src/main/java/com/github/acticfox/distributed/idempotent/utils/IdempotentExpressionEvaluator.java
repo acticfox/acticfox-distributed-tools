@@ -9,7 +9,8 @@ package com.github.acticfox.distributed.idempotent.utils;
 
 import java.lang.reflect.Method;
 
-import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
+import org.springframework.core.DefaultParameterNameDiscoverer;
+import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
@@ -25,7 +26,7 @@ public class IdempotentExpressionEvaluator {
 
     private static ExpressionParser                          parser     = new SpelExpressionParser();
 
-    private static LocalVariableTableParameterNameDiscoverer discoverer = new LocalVariableTableParameterNameDiscoverer();
+    private static ParameterNameDiscoverer discoverer = new DefaultParameterNameDiscoverer();
 
     public static String eval(String spelExpression, Method targetMethod, Object[] args) {
         String[] params = discoverer.getParameterNames(targetMethod);
